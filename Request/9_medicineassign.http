@@ -1,0 +1,70 @@
+@port=3000
+@host=http://localhost:{{port}}/api/
+@authhost={{host}}
+@medicineassignhost={{host}}medicineassign
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDRmNjVhMDNmMGM5ODFjNDgwYTI2NGIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MTY5MDYxOTQsImV4cCI6MTYxNjk5MjU5NH0.a79Gz6xU1m4XEW_8nAV4mWfkUTyZGlAnbkpz437vGUg
+@aid=605af3c191a3a417505d8792
+@pid=
+@mid=605afc6e0320891210d766f9
+@fid=605afac0b01cbc1cd0d6bc25
+@id=605af3c191a3a417505d8792
+
+###
+# login
+POST {{authhost}}login HTTP/1.1
+content-type : application/json
+
+{
+    "username":"17bmiit107@gmail.com",
+    "password":"admin"
+}
+
+###
+# add staffmember
+POST {{medicineassignhost}}/add/{{aid}} HTTP/1.1
+content-type : application/json
+x-access-token : {{token}}
+
+{
+    "medicine_id":"{{mid}}",
+    "fraction_id":"{{fid}}",
+    "supportive":"Water"
+}
+
+###
+# get list of staffmember with pagination
+GET {{medicineassignhost}}/list/{{aid}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+# get staffmember details by id
+PUT {{medicineassignhost}}/get/{{aid}}/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+#update staffmember details by id
+PATCH  {{medicineassignhost}}/update/{{aid}}/{{id}} HTTP/1.1
+content-type : application/json
+x-access-token : {{token}}
+
+{
+    "from_time": "12:15 PM",
+    "to_time": "10:15 PM",
+    "staff_id": "605492df1058be0470320096",
+    "date": "2021-03-25"
+}
+
+###
+# deactivate staffmember with id
+POST {{medicineassignhost}}/deactivate/{{aid}}/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+# activate staffmember with id
+POST {{medicineassignhost}}/activate/{{aid}}/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+# delete staffmember with id
+DELETE {{medicineassignhost}}/delete/{{aid}}/{{id}} HTTP/1.1
+x-access-token : {{token}}

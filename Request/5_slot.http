@@ -1,0 +1,63 @@
+@port=3000
+@host=http://localhost:{{port}}/api/
+@authhost={{host}}
+@slothost={{host}}slot
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDU0OTJjMjcwOTFmYTFjN2NkNGEyYmQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MTY1NTg2NjIsImV4cCI6MTYxNjY0NTA2Mn0.Jd2kRjAi2yGCOEs4w36BoIY-wqIFDp0ZLWS_cJ9gVtU
+@id=605af83bcaaeea1e081fda89
+
+###
+# login
+POST {{authhost}}login HTTP/1.1
+content-type : application/json
+
+{
+    "username":"17bmiit107@gmail.com",
+    "password":"admin"
+}
+
+###
+# add staffmember
+POST {{slothost}}/add HTTP/1.1
+Content-Type: application/json
+x-access-token : {{token}}
+
+{
+    "from_time": "08:00 AM",
+    "to_time": "08:00 PM"
+}
+
+###
+# get list of staffmember with pagination
+GET {{slothost}}/list HTTP/1.1
+x-access-token : {{token}}
+
+###
+# get staffmember details by id
+PUT {{slothost}}/get/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+#update staffmember details by id
+PATCH  {{slothost}}/update/{{id}} HTTP/1.1
+Content-Type: application/json
+x-access-token : {{token}}
+
+{
+    "from_time": "08:00 AM",
+    "to_time": "09:00 PM"
+}
+
+###
+# deactivate staffmember with id
+POST {{slothost}}/deactivate/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+# activate staffmember with id
+POST {{slothost}}/activate/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+# delete staffmember with id
+DELETE {{slothost}}/delete/{{id}} HTTP/1.1
+x-access-token : {{token}}

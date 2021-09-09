@@ -1,0 +1,25 @@
+@port=3000
+@host=http://localhost:{{port}}/api/
+@authhost={{host}}
+
+###
+POST {{authhost}}registration HTTP/1.1
+content-type : application/json
+
+{
+    "name":"Kachhadiya Kishan Sanjaybhai",
+    "contactno":"7069993960",
+    "username":"17bmiit107@gmail.com",
+    "password":"admin",
+    "role":"admin"
+}
+
+###
+# login
+POST {{authhost}}login HTTP/1.1
+content-type : application/json
+
+{
+    "username":"17bmiit107@gmail.com",
+    "password":"admin"
+}

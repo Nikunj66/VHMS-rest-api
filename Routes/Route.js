@@ -1,0 +1,12 @@
+module.exports.AuthRoute = require('./AuthRoute');
+module.exports.StaffMemberRoute = require('./StaffMemberRoute');
+module.exports.PatientRoute = require('./PatientRoute');
+module.exports.MedicineRoute = require('./MedicineRoute');
+module.exports.TreatmentRoute = require('./TreatmentRoute');
+module.exports.PrescriptionRoute = require('./PrescriptionRoute');
+module.exports.SlotRoute = require('./SlotRoute');
+module.exports.AppointmentRoute = require('./AppointmentRoute');
+module.exports.FractionRoute = require('./FractionRoute');
+module.exports.MedicineAssignRoute = require('./MedicineAssignRoute');
+module.exports.TreatmentAssignRoute = require('./TreatmentAssignRoute');
+module.exports.DoctorPatientListRoute = require('./DoctorPatientListRoute');

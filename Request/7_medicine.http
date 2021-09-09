@@ -1,0 +1,63 @@
+@port=3000
+@host=http://localhost:{{port}}/api/
+@authhost={{host}}
+@medicinehost={{host}}medicine
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDU0OTJjMjcwOTFmYTFjN2NkNGEyYmQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MTY1NTg2NjIsImV4cCI6MTYxNjY0NTA2Mn0.Jd2kRjAi2yGCOEs4w36BoIY-wqIFDp0ZLWS_cJ9gVtU
+@id=605afc6e0320891210d766f9
+
+###
+# login
+POST {{authhost}}login HTTP/1.1
+content-type : application/json
+
+{
+    "username":"17bmiit107@gmail.com",
+    "password":"admin"
+}
+
+###
+# add staffmember
+POST {{medicinehost}}/add HTTP/1.1
+Content-Type: application/json
+x-access-token : {{token}}
+
+{
+    "name": "Medicine1",
+    "price": "100"
+}
+
+###
+# get list of staffmember with pagination
+GET {{medicinehost}}/list HTTP/1.1
+x-access-token : {{token}}
+
+###
+# get staffmember details by id
+PUT {{medicinehost}}/get/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+#update staffmember details by id
+PATCH  {{medicinehost}}/update/{{id}} HTTP/1.1
+Content-Type: application/json
+x-access-token : {{token}}
+
+{
+    "name": "Medicine 1",
+    "price": "100"
+}
+
+###
+# deactivate staffmember with id
+POST {{medicinehost}}/deactivate/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+# activate staffmember with id
+POST {{medicinehost}}/activate/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+# delete staffmember with id
+DELETE {{medicinehost}}/delete/{{id}} HTTP/1.1
+x-access-token : {{token}}

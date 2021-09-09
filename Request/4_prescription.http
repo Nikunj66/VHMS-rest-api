@@ -1,0 +1,68 @@
+@port=3000
+@host=http://localhost:{{port}}/api/
+@authhost={{host}}
+@prescriptionhost={{host}}prescription
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDRmNjVhMDNmMGM5ODFjNDgwYTI2NGIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MTY5MDYxOTQsImV4cCI6MTYxNjk5MjU5NH0.a79Gz6xU1m4XEW_8nAV4mWfkUTyZGlAnbkpz437vGUg
+@pid=6054950a09f4251e0c28a4b4
+@id=605adf31fd0ec21420bb404e
+
+###
+# login
+POST {{authhost}}login HTTP/1.1
+content-type : application/json
+
+{
+    "username":"17bmiit107@gmail.com",
+    "password":"admin"
+}
+
+###
+# add staffmember
+POST {{prescriptionhost}}/add/{{pid}} HTTP/1.1
+content-type : application/json
+x-access-token : {{token}}
+
+{
+    "startdate": "2021-03-24",
+    "days": "3",
+    "treatment_description": "xyz",
+    "diagnosis_details": "pqr"
+}
+
+###
+# get list of staffmember with pagination
+GET {{prescriptionhost}}/list/{{pid}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+# get staffmember details by id
+PUT {{prescriptionhost}}/get/{{pid}}/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+#update staffmember details by id
+PATCH  {{prescriptionhost}}/update/{{pid}}/{{id}} HTTP/1.1
+content-type : application/json
+x-access-token : {{token}}
+
+{
+    "startdate": "2021-03-25",
+    "days": "3",
+    "treatment_description": "xyz",
+    "diagnosis_details": "pqr"
+}
+
+###
+# deactivate staffmember with id
+POST {{prescriptionhost}}/deactivate/{{pid}}/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+# activate staffmember with id
+POST {{prescriptionhost}}/activate/{{pid}}/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+# delete staffmember with id
+DELETE {{prescriptionhost}}/delete/{{pid}}/{{id}} HTTP/1.1
+x-access-token : {{token}}

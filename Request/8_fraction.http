@@ -1,0 +1,67 @@
+@port=3000
+@host=http://localhost:{{port}}/api/
+@authhost={{host}}
+@fractionhost={{host}}fraction
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDU0OTJjMjcwOTFmYTFjN2NkNGEyYmQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MTY1NTg2NjIsImV4cCI6MTYxNjY0NTA2Mn0.Jd2kRjAi2yGCOEs4w36BoIY-wqIFDp0ZLWS_cJ9gVtU
+@id=605afaa4b01cbc1cd0d6bc24
+
+###
+# login
+POST {{authhost}}login HTTP/1.1
+content-type : application/json
+
+{
+    "username":"17bmiit107@gmail.com",
+    "password":"admin"
+}
+
+###
+# add staffmember
+POST {{fractionhost}}/add HTTP/1.1
+Content-Type: application/json
+x-access-token : {{token}}
+
+{
+    "is_morning":true,
+    "is_afternoon":true,
+    "is_evening":true,
+    "is_night":true
+}
+
+###
+# get list of staffmember with pagination
+GET {{fractionhost}}/list HTTP/1.1
+x-access-token : {{token}}
+
+###
+# get staffmember details by id
+PUT {{fractionhost}}/get/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+#update staffmember details by id
+PATCH  {{fractionhost}}/update/{{id}} HTTP/1.1
+Content-Type: application/json
+x-access-token : {{token}}
+
+{
+    "is_morning":true,
+    "is_afternoon":true,
+    "is_evening":true,
+    "is_night":false
+}
+
+###
+# deactivate staffmember with id
+POST {{fractionhost}}/deactivate/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+# activate staffmember with id
+POST {{fractionhost}}/activate/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+# delete staffmember with id
+DELETE {{fractionhost}}/delete/{{id}} HTTP/1.1
+x-access-token : {{token}}

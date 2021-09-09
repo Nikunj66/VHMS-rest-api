@@ -1,0 +1,68 @@
+@port=3000
+@host=http://localhost:{{port}}/api/
+@authhost={{host}}
+@staffhost={{host}}staffmember
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDU0OTJjMjcwOTFmYTFjN2NkNGEyYmQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MTY4NDczOTgsImV4cCI6MTYxNjkzMzc5OH0.8nzg_XQvnMv0sJwe8JslcIvSX5uNfsD0NgOQE5BhN4w
+@id=605492c27091fa1c7cd4a2bd
+
+###
+# login
+POST {{authhost}}login HTTP/1.1
+content-type : application/json
+
+{
+    "username":"17bmiit107@gmail.com",
+    "password":"admin"
+}
+
+###
+# add staffmember
+POST {{staffhost}}/add HTTP/1.1
+x-access-token : {{token}}
+
+{
+    "name":"Kachhadiya Kishan Sanjaybhai",
+    "contactno":"7069993961",
+    "username":"17bmiit111@gmail.com",
+    "password":"admin",
+    "role":"admin",
+}
+
+###
+# get list of staffmember with pagination
+GET {{staffhost}}/list HTTP/1.1
+x-access-token : {{token}}
+
+###
+# get staffmember details by id
+PUT {{staffhost}}/get/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+#update staffmember details by id
+PATCH  {{staffhost}}/update/{{id}} HTTP/1.1
+Content-Type: application/json
+x-access-token : {{token}}
+
+{
+    "name":"Kachhadiya Kishan Sanjaybhai",
+    "contactno":"7069993960",
+    "username":"17bmiit107@gmail.com",
+    "password":"admin",
+    "role":"admin"
+}
+
+###
+# deactivate staffmember with id
+POST {{staffhost}}/deactivate/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+# activate staffmember with id
+POST {{staffhost}}/activate/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+# delete staffmember with id
+DELETE {{staffhost}}/delete/{{id}} HTTP/1.1
+x-access-token : {{token}}

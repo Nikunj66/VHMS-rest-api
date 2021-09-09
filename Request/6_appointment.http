@@ -1,0 +1,68 @@
+@port=3000
+@host=http://localhost:{{port}}/api/
+@authhost={{host}}
+@appointmenthost={{host}}appointment
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDU0OTJjMjcwOTFmYTFjN2NkNGEyYmQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MTY1NTg2NjIsImV4cCI6MTYxNjY0NTA2Mn0.Jd2kRjAi2yGCOEs4w36BoIY-wqIFDp0ZLWS_cJ9gVtU
+@pid=605adf31fd0ec21420bb404e
+@id=605af3c191a3a417505d8792
+
+###
+# login
+POST {{authhost}}login HTTP/1.1
+content-type : application/json
+
+{
+    "username":"17bmiit107@gmail.com",
+    "password":"admin"
+}
+
+###
+# add staffmember
+POST {{appointmenthost}}/add/{{pid}} HTTP/1.1
+content-type : application/json
+x-access-token : {{token}}
+
+{
+    "from_time": "12:15 PM",
+    "to_time": "01:15 PM",
+    "staff_id": "605492df1058be0470320096",
+    "date": "2021-03-25"
+}
+
+###
+# get list of staffmember with pagination
+GET {{appointmenthost}}/list/{{pid}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+# get staffmember details by id
+PUT {{appointmenthost}}/get/{{pid}}/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+#update staffmember details by id
+PATCH  {{appointmenthost}}/update/{{pid}}/{{id}} HTTP/1.1
+content-type : application/json
+x-access-token : {{token}}
+
+{
+    "from_time": "12:15 PM",
+    "to_time": "10:15 PM",
+    "staff_id": "605492df1058be0470320096",
+    "date": "2021-03-25"
+}
+
+###
+# deactivate staffmember with id
+POST {{appointmenthost}}/deactivate/{{pid}}/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+# activate staffmember with id
+POST {{appointmenthost}}/activate/{{pid}}/{{id}} HTTP/1.1
+x-access-token : {{token}}
+
+###
+# delete staffmember with id
+DELETE {{appointmenthost}}/delete/{{pid}}/{{id}} HTTP/1.1
+x-access-token : {{token}}
